@@ -101,6 +101,10 @@ export default new Router({
       path: '/wallpaper/:wallpaperId',
       component: Wallpaper
     },
+    {
+      path: '/cat/:categoryId',
+      component: () => import('@/views/category/Category.vue')
+    },
     {path: '/forums', component: Forums},
     {path: '/forums/boards/:boardId', component: Boards},
     {path: '/forums/boards/:boardId/post/new', component: NewPost},

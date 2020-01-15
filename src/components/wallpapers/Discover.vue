@@ -38,7 +38,7 @@
 
     },
     methods: {
-      initFlexImages: function () {
+      initFlexImages () {
         $('.flex-images').flexImages({
           rowHeight: 250,
           truncate: 1
