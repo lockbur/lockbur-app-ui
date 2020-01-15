@@ -19,7 +19,6 @@ import Post from '@/components/forums/Post'
 import NewPost from '@/components/forums/NewPost'
 // Login
 import Login from '@/views/Login'
-import Register from '@/components/Register'
 import Forget from '@/components/Forget'
 import Reset from '@/components/Reset'
 // User
@@ -49,7 +48,10 @@ export default new Router({
   routes: [
     {path: '/demo', component: Demo},
     {path: '/login', component: Login},
-    {path: '/register', component: Register},
+    {
+      path: '/register',
+      component: () => import('@/views/Register')
+    },
     {path: '/forget', component: Forget},
     {path: '/reset', component: Reset},
     {

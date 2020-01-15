@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper">
+  <section>
     <div class="flex-images bg-white-only"
          v-infinite-scroll="loadMore"
          infinite-scroll-disabled="busy"

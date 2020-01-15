@@ -1,12 +1,17 @@
 <template>
-  <section class="scrollable">
+  <section>
     <div class="flex-images bg-white-only">
       <template v-for="wallpaper in list">
-        <a :href="'/#/wallpaper/'+wallpaper.id" target="_blank" class="item animated fadeInUp"
-           :data-w="wallpaper.width"
-           :data-h="wallpaper.height">
-          <img src="/static/images/blank.gif"
-               :data-src="'//img.wallbase.tv/'+wallpaper.thumbUrl+'?x-oss-process=style/thumb'">
+        <a
+          :key="wallpaper.id"
+          :href="'/#/wallpaper/'+wallpaper.id"
+          :data-w="wallpaper.width"
+          :data-h="wallpaper.height"
+          target="_blank"
+          class="item animated fadeInUp">
+          <img
+            :data-src="'//img.wallbase.tv/'+wallpaper.thumbUrl+'?x-oss-process=style/thumb'"
+            src="/static/images/blank.gif">
         </a>
       </template>
     </div>
@@ -19,31 +24,31 @@
   import WallpaperApi from '@/service/WallpaperApi'
 
   export default {
-    data() {
+    data () {
       return {
         list: []
       }
     },
     created: function () {
-      this.query();
+      this.query()
     },
     methods: {
       initFlexImages: function () {
         $('.flex-images').flexImages({
           rowHeight: 250,
           truncate: 1
-        });
+        })
       },
-      query: function () {
+      query () {
         WallpaperApi.getTop().then((res) => {
-          if (res.data.content != undefined && res.data.content.length > 0) {
-            this.list = this.list.concat(res.data.content);
+          if (res.data.content !== undefined && res.data.content.length > 0) {
+            this.list = this.list.concat(res.data.content)
             this.$nextTick(function () {
-              this.initFlexImages();
-            });
+              this.initFlexImages()
+            })
           }
         }).catch(err => {
-          console.log(err);
+          console.log(err)
         })
       }
     }

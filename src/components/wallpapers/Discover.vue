@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper">
+  <section>
     <div class="flex-images bg-white-only"
          v-infinite-scroll="loadMore"
          infinite-scroll-disabled="busy"
@@ -24,7 +24,7 @@
   import WallpaperApi from '@/service/WallpaperApi'
 
   export default {
-    data() {
+    data () {
       return {
         list: [],
         page: 1,
@@ -42,21 +42,21 @@
         $('.flex-images').flexImages({
           rowHeight: 250,
           truncate: 1
-        });
+        })
       },
-      loadMore: function () {
-        this.busy = true;
+      loadMore () {
+        this.busy = true
         WallpaperApi.getDiscover(this.page).then((res) => {
-          if (res.data.content != undefined && res.data.content.length > 0) {
-            this.list = this.list.concat(res.data.content);
+          if (res.data.content !== undefined && res.data.content.length > 0) {
+            this.list = this.list.concat(res.data.content)
             this.$nextTick(function () {
-              this.initFlexImages();
-              this.page++;
-              this.busy = false;
-            });
+              this.initFlexImages()
+              this.page++
+              this.busy = false
+            })
           }
         }).catch(err => {
-          console.log(err);
+          console.log(err)
         })
       }
     }

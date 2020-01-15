@@ -3,11 +3,11 @@
     <Navbar></Navbar>
     <div class="container">
       <section class="scrollable wrapper">
-        <div class="container aside-xxl">
-          <section class="panel panel-default ">
-            <div class="panel-body">
+        <div class="container bg-white-only">
+          <div class="row padder-v">
+            <div class="col-sm-6">
               <h3 class="m-t-none m-b">新用户注册</h3>
-              <div class="alert alert-danger animated fadeInUp" v-if="msg.show">
+              <div v-if="msg.show" class="alert alert-danger animated fadeInUp">
                 <i class="fa fa-ban-circle"></i><strong>错误信息!</strong>
                 <span id="errorPlacement">{{msg.message}}</span>
               </div>
@@ -34,29 +34,37 @@
                   </label>
                 </div>
                 <div class="form-group">
-                  <button type="button" class="btn btn-info btn-block" v-on:click="register">
+                  <button type="button" class="btn btn-info" @:click="register">
                     <strong>注 册</strong>
                   </button>
                 </div>
               </form>
             </div>
-          </section>
-          <section class="panel panel-default ">
-            <div class="panel-body">
+            <div class="col-sm-6">
+              <h2>为什么要加入萝卜壁纸?</h2>
+              <div style="line-height: 200%; font-size: 14px">
+                - 成为中国壁纸数量增长最快的俱乐部!<br>
+                - 提供优质的壁纸建议! 上传壁纸,给世界分享你的优秀壁纸作品!<br>
+                - <span style="font-weight: bold; color: #D00;">注册成会员比普通用户可以看到更少的广告!</span><br>
+                - 当有用户跟您互动或者你壁纸被点赞,接收反馈信息!<br>
+                - 归档你的壁纸并分享给你的朋友!<br>
+                - 在你上传壁纸和分享壁纸后者评论壁纸你的显示尊贵头像!<br>
+                - 可以参与投票,帮助统计最好的壁纸和最受欢迎的壁纸榜单!<br>
+              </div>
               <h4>如果已有账号?</h4>
               <p>点击<a href="/#/login" class="text-info">登录</a></p>
               <p>或者使用第三方账号登录</p>
-              <a href="#" class="btn btn-primary btn-block m-b-sm">
+              <a href="#" class="btn btn-primary">
                 <i class="fa fa-pinterest-square pull-left"></i>qq登录
               </a>
-              <a href="#" class="btn btn-info btn-block m-b-sm">
+              <a href="#" class="btn btn-info">
                 <i class="fa fa-weibo pull-left"></i> 微博登录
               </a>
-              <a href="#" class="btn btn-danger btn-block">
+              <a href="#" class="btn btn-danger">
                 <i class="fa fa-google-plus pull-left"></i> 百度账号登录
               </a>
             </div>
-          </section>
+          </div>
         </div>
       </section>
     </div>
@@ -71,37 +79,37 @@
   import AccountApi from '@/service/AccountApi'
 
   export default {
-    data() {
-      return {
-        msg: {
-          show: false,
-          message: "登录可以获得更好的服务."
-        },
-        user: {
-          username: "",
-          email: "",
-          password: "",
-          confirmPassword: ""
-        }
-      }
-    },
     components: {
       Navbar, Footer
     },
+    data () {
+      return {
+        msg: {
+          show: false,
+          message: '登录可以获得更好的服务.'
+        },
+        user: {
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: ''
+        }
+      }
+    },
     methods: {
-      register: function () {
+      register () {
         AccountApi.register(this.user).then((res) => {
-          if (res.code == "2004000") {
-            let AUTH_TOKEN = res.data.token
+          if (res.code === '2004000') {
+            const AUTH_TOKEN = res.data.token
             Storage.put('AUTH_TOKEN', AUTH_TOKEN)
-            //TODO.. 添加一根引导页面
-            window.location.href = "/#/"
+            // TODO.. 添加一根引导页面
+            window.location.href = '/#/'
           } else {
-            this.msg.show = true;
-            this.msg.message = res.msg;
+            this.msg.show = true
+            this.msg.message = res.msg
           }
         }).catch(err => {
-          console.log(err);
+          console.log(err)
         })
       }
     }

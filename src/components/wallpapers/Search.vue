@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper">
+  <section>
     <div class="jumbotron bg-light lter">
       <h2>欢迎来到, Wallbase.tv!</h2>
       <p>更多壁纸,更多分享,找寻自己最好的记忆.</p>

@@ -1,5 +1,5 @@
 <template>
-  <section class="scrollable wrapper">
+  <section class="scrollable">
     <div class="flex-images bg-white-only">
       <template v-for="wallpaper in list">
         <a :href="'/#/wallpaper/'+wallpaper.id" target="_blank" class="item animated fadeInUp"
