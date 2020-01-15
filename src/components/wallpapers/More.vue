@@ -36,7 +36,7 @@
       },
       query: function () {
         WallpaperApi.getTop().then((res) => {
-          this.list = res.data.content;
+          this.list = res.data.list;
           this.$nextTick(function () {
             this.init();
           });

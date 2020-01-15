@@ -12,8 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'https://www.wallbase.tv',
-        // target: 'http://localhost:8080',
+        //target: 'https://www.wallbase.tv',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/api'

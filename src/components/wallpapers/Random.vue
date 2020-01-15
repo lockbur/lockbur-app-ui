@@ -42,8 +42,8 @@
       loadMore: function () {
         this.busy = true;
         WallpaperApi.getRandom(this.page).then((res) => {
-          if (res.data.content != undefined && res.data.content.length > 0) {
-            this.list = this.list.concat(res.data.content);
+          if (res.data.list.length > 0) {
+            this.list = this.list.concat(res.data.list);
             this.$nextTick(function () {
               this.initFlexImages();
               this.page++;
