@@ -1,0 +1,49 @@
+stages:
+- package
+- build
+
+services:
+- docker:dind
+
+variables:
+  CONTAINER_IMAGE: wallbase/wallbase-app-ui
+  DOCKER_DRIVER: overlay2
+  WEB_APP_UI: wallbase-app-ui
+  IMAGE_TAG: $CI_COMMIT_REF_NAME-$CI_PIPELINE_ID
+  WEB_APP_UI_IMAGE: wallbase/$WEB_APP_UI
+
+
+cache:
+  paths:
+  - node_modules/
+
+package-app:
+  stage: package
+  image: node:latest
+  script:
+  - yarn install
+  - yarn build
+  - cp baidu_verify_YPnaONXt3l.html dist/
+  artifacts:
+    expire_in: 1 day
+    paths:
+    - dist
+  only:
+  - master
+  - develop
+
+build-docker-image:
+  stage: build
+  image: docker:stable
+  before_script:
+  - docker info
+  - docker login -u $registry_user_name -p $registry_user_token
+  script:
+  - docker build -t $WEB_APP_UI_IMAGE:$IMAGE_TAG  .
+  - docker push $WEB_APP_UI_IMAGE:$IMAGE_TAG
+  - docker tag $WEB_APP_UI_IMAGE:$IMAGE_TAG $WEB_APP_UI_IMAGE:latest
+  - docker push $WEB_APP_UI_IMAGE:latest
+  only:
+  - master
+  - develop
+
